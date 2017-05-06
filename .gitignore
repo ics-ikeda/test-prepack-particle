@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+thumbs.db
+.DS_Store
+.idea
+*.map
+/build/**.js.map
+/build/shuffle-text.module.js.map
+/build/shuffle-text.js.map
