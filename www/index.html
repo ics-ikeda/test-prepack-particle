@@ -5,49 +5,49 @@
   <title>Title</title>
 </head>
 <body>
-  <canvas id="world" width="465" height="465"></canvas>
-  <script src="particle.js"></script>
-  <script>
-	  (function () {
-	  	"use strict";
-		  // キャンバスの初期化
-		  var canvas = document.querySelector("#world");
-		  var ctx = canvas.getContext("2d");
-		  var mouseX = 0;
-		  var mouseY = 0;
+<canvas id="world" width="465" height="465"></canvas>
+<script src="particle.js"></script>
+<script>
+  (function () {
+    'use strict';
+    // キャンバスの初期化
+    var canvas = document.querySelector('#world');
+    var ctx = canvas.getContext('2d');
+    var mouseX = 0;
+    var mouseY = 0;
 
-		  var world = new World();
-		  world.init();
+    var world = new World();
+    world.init();
 
-		  // イベントハンドラの登録
-		  canvas.addEventListener("mousemove", function (e) {
-			  var rect = e.target.getBoundingClientRect();
-			  // マウス座標の更新
-			  mouseX = e.clientX - rect.left;
-			  mouseY = e.clientY - rect.top;
-		  });
+    // イベントハンドラの登録
+    canvas.addEventListener('mousemove', function (e) {
+      var rect = e.target.getBoundingClientRect();
+      // マウス座標の更新
+      mouseX = e.clientX - rect.left;
+      mouseY = e.clientY - rect.top;
+    });
 
 
-		  enterFrameHandler();
-		  function enterFrameHandler() {
-			  requestAnimationFrame(enterFrameHandler);
+    enterFrameHandler();
+    function enterFrameHandler() {
+      requestAnimationFrame(enterFrameHandler);
 
-			  // 背景を黒く塗りつぶす
-			  ctx.fillStyle = "rgb(0, 0, 0)";
-			  ctx.fillRect(0, 0, 465, 465);
+      // 背景を黒く塗りつぶす
+      ctx.fillStyle = 'rgb(0, 0, 0)';
+      ctx.fillRect(0, 0, 465, 465);
 
-			  // パーティクルの塗りの色を設定
-			  ctx.fillStyle = "rgb(255, 255, 255)";
+      // パーティクルの塗りの色を設定
+      ctx.fillStyle = 'rgb(255, 255, 255)';
 
-			  var particleList = world.update(mouseX, mouseY);
+      var particleList = world.update(mouseX, mouseY);
 
-			  particleList.map(function (n) {
-				  // 点描 (1×1pxの四角形を描画)
-				  ctx.fillRect(n.x, n.y, 1, 1);
-			  });
-		  }
-	  })();
-  
-  </script>
+      particleList.map(function (n) {
+        // 点描 (1×1pxの四角形を描画)
+        ctx.fillRect(n.x, n.y, 1, 1);
+      });
+    }
+  })();
+
+</script>
 </body>
 </html>
