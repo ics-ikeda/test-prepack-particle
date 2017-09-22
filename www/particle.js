@@ -1,7 +1,14 @@
 (function () {
   var _$0 = this;
 
-  function _0() {
+  var _1 = function (x, y) {
+    this.x = x;
+    this.y = y;
+    this.vx = 0;
+    this.vy = 0;
+  };
+
+  var _0 = function () {
     const particleList = [];
 
     this.init = function () {
@@ -30,14 +37,7 @@
       });
       return particleList;
     };
-  }
-
-  function _1(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = 0;
-    this.vy = 0;
-  }
+  };
 
   World = _0;
 }).call(this);
