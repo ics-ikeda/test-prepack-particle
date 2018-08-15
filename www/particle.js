@@ -1,20 +1,20 @@
 (function () {
   var _$0 = this;
 
-  var _1 = function (x, y) {
+  var _7 = function (x, y) {
     this.x = x;
     this.y = y;
     this.vx = 0;
     this.vy = 0;
   };
 
-  var _0 = function () {
+  var _1 = function () {
     const particleList = [];
 
     this.init = function () {
       // パーティクルの初期化
       for (var i = 0; i < 10000; i++) {
-        const p = new _1(_$0.Math.random() * 465, _$0.Math.random() * 465);
+        const p = new _7(Math.random() * 465, Math.random() * 465);
         particleList.push(p);
       }
     };
@@ -39,5 +39,5 @@
     };
   };
 
-  World = _0;
+  _$0.World = _1;
 }).call(this);
