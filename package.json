@@ -1,7 +1,7 @@
 {
   "devDependencies": {
-    "lite-server": "^2.3.0",
-    "prepack": "^0.2.6"
+    "lite-server": "^2.4.0",
+    "prepack": "^0.2.47"
   },
   "scripts": {
     "prepack": "prepack src/particle.js --out www/particle.js",
