@@ -11,56 +11,63 @@
    * @param {number} y
    * @constructor
    */
-  function Particle(x, y) {
-    this.x = x;
-    this.y = y;
-    this.vx = 0;
-    this.vy = 0;
+  class Particle {
+    constructor(x, y) {
+      this.x = x;
+      this.y = y;
+      this.vx = 0;
+      this.vy = 0;
+    }
   }
 
+  function updateParticlePosition(particle, gravityX, gravityY) {
+    const diffX = gravityX - particle.x;
+    const diffY = gravityY - particle.y;
+    const acc = ACC_VALUE / (diffX * diffX + diffY * diffY);
+    const accX = acc * diffX;
+    const accY = acc * diffY;
 
-  function World() {
-    const particleList = [];
+    particle.vx += accX;
+    particle.vy += accY;
+    particle.x += particle.vx;
+    particle.y += particle.vy;
 
-    this.init = function () {
+    particle.vx *= FRICTION;
+    particle.vy *= FRICTION;
+
+    if (particle.x > STAGE_W)
+      particle.x = 0;
+    else if (particle.x < 0)
+      particle.x = STAGE_W;
+    if (particle.y > STAGE_H)
+      particle.y = 0;
+    else if (particle.y < 0)
+      particle.y = STAGE_H;
+  }
+
+  class World {
+
+    constructor() {
+      this.particleList = [];
+    }
+
+    init() {
       // パーティクルの初期化
-      for (var i = 0; i < MAX_NUM; i++) {
+      for (let i = 0; i < MAX_NUM; i++) {
         const p = new Particle(
           Math.random() * STAGE_W,
-          Math.random() * STAGE_H
+          Math.random() * STAGE_H,
         );
-        particleList.push(p);
+        this.particleList.push(p);
       }
     };
 
-    this.update = function (gravityX, gravityY) {
-
-      particleList.map(function (n) {
-        const diffX = gravityX - n.x;
-        const diffY = gravityY - n.y;
-        const acc = ACC_VALUE / (diffX * diffX + diffY * diffY);
-        const accX = acc * diffX;
-        const accY = acc * diffY;
-
-        n.vx += accX;
-        n.vy += accY;
-        n.x += n.vx;
-        n.y += n.vy;
-
-        n.vx *= FRICTION;
-        n.vy *= FRICTION;
-
-        if (n.x > STAGE_W)
-          n.x = 0;
-        else if (n.x < 0)
-          n.x = STAGE_W;
-        if (n.y > STAGE_H)
-          n.y = 0;
-        else if (n.y < 0)
-          n.y = STAGE_H;
+    update(gravityX, gravityY) {
+      this.particleList.forEach((particle) => {
+        updateParticlePosition(particle, gravityX, gravityY);
       });
 
-      return particleList;
+      return this.particleList;
     };
   }
 
